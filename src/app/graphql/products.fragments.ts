@@ -27,9 +27,13 @@ fragment Product on Product {
     id
     name
     description
+    slug
     variants {
     id
     name
+    assets{
+        source
+    }
     }
     featuredAsset {
         name

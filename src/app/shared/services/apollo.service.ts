@@ -8,7 +8,11 @@ export class ApolloService {
 
     constructor(private _apollo: Apollo) {}
 
-    public query(request: GraphQLRequest) {
+    public watchQuery(request: GraphQLRequest) {
        return this._apollo.watchQuery<any, any>(request).valueChanges.pipe(map(result => result.data))
+    }
+
+    public query(request: GraphQLRequest) {
+       return this._apollo.query<any, any>(request).pipe(map(result => result.data))
     }
 }

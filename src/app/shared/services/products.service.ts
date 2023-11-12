@@ -13,7 +13,7 @@ export class ProductsService {
           query: GET_PRODUCT_LIST,
           variables: { opts }
         };
-        return this.apolloService.query(data);
+        return this.apolloService.watchQuery(data);
     }
 
     public getProductById(id: number){

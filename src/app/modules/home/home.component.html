@@ -4,7 +4,7 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-8">
                 <fuse-card class="flex flex-col cursor-pointer" #fuseCard *ngFor="let item of products$ | async" (click)="onProductClick(item.id)">
                     <div class="banner-height">
-                        <img class="m-0 object-cover h-full" [src]="item.featuredAsset.preview" [alt]="item.featuredAsset.name">
+                        <img class="m-0 object-cover h-full" [src]="item?.featuredAsset?.preview" [alt]="item?.featuredAsset?.name">
                     </div>
                     <div class="text-lg font-bold mt-2 line-clamp-2 px-4" [title]="item.name"> {{ item.name }}</div>
                     <div class="mt-3 px-4">
