@@ -49,6 +49,8 @@ export class ProductComponent implements OnInit, OnDestroy {
       ofType(productsActions.ADD_ITEM_TO_ORDER_SUCCESS)
     ).subscribe(() => {
       this.spinner = false;
+      console.log('asd')
+      // this.store.dispatch(productsActions.GetActiveOrder())
     })
     this.subLoadProductFailed = this.actions$.pipe(
       ofType(productsActions.REQUEST_FAILED)
@@ -64,6 +66,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   
   private addItemToOrder() {
-    this.store.dispatch(productsActions.AddItemToOrder({payload: { productVariantId: this.product.id, quantity: 2 }}))
+    this.store.dispatch(productsActions.AddItemToOrder({payload: { productVariantId: "7", quantity: 2 }}))
   }
 }

@@ -59,12 +59,30 @@ fragment Product on Product {
 `
 
 const ADD_ITEM_TO_ORDER_RESULT_FRAGMENT = gql`
-fragment addItemToOrderResult on UpdateOrderItemsResult {
+fragment AddItemToOrderResult on UpdateOrderItemsResult {
     ... on Order {
-      id
-      type
-      active
-      total
+        id
+        type
+        active
+        total
+        totalWithTax
+        totalQuantity
+        subTotal
+        subTotalWithTax
+        shipping
+        shippingWithTax
+    
+        billingAddress {
+            fullName
+            country
+            phoneNumber
+        }
+        taxSummary {
+            description
+            taxRate
+            taxBase
+            taxTotal
+        }
     }
     ... on OrderModificationError {
       message
@@ -86,4 +104,32 @@ fragment addItemToOrderResult on UpdateOrderItemsResult {
   }
 `
 
-export { PRODUCT_LIST_RESULT_FRAGMENT, PRODUCT_FRAGMENT, ADD_ITEM_TO_ORDER_RESULT_FRAGMENT };
+const ACTIVE_ORDER_FRAGMENT = gql`
+fragment ActiveOrder on Order {
+    id
+    type
+    active
+    total
+    totalWithTax
+    totalQuantity
+    subTotal
+    subTotalWithTax
+    shipping
+    shippingWithTax
+    lines {
+        id
+    }
+    shippingAddress {
+        fullName
+        country
+        phoneNumber
+    }
+}
+`
+
+export { 
+    PRODUCT_LIST_RESULT_FRAGMENT,
+    PRODUCT_FRAGMENT,
+    ADD_ITEM_TO_ORDER_RESULT_FRAGMENT,
+    ACTIVE_ORDER_FRAGMENT,
+};

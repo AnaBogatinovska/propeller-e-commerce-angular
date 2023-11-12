@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ProductListOptions } from "../interfaces/products/product-list-options.interface";
-import { GET_PRODUCT_BY_ID, GET_PRODUCT_LIST } from 'app/graphql/products.queries';
+import { GET_ACTIVE_ORDER, GET_PRODUCT_BY_ID, GET_PRODUCT_LIST } from 'app/graphql/products.queries';
 import { ApolloService } from "app/shared/services/apollo.service";
 import { ADD_ITEM_TO_ORDER } from "app/graphql/products.mutations";
 
@@ -32,4 +32,11 @@ export class ProductsService {
         };
         return this.apolloService.mutate(data);
     }
+
+    public getActiveOrder(){
+      const data = {
+        query: GET_ACTIVE_ORDER
+      };
+      return this.apolloService.query(data);
+  }
 }

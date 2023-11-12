@@ -5,7 +5,7 @@ import { ADD_ITEM_TO_ORDER_RESULT_FRAGMENT } from "./products.fragments";
 const ADD_ITEM_TO_ORDER = gql`
     mutation addItemToOrder($productVariantId: ID!, $quantity: Int!) {
         addItemToOrder(productVariantId: $productVariantId, quantity: $quantity) {
-        ...addItemToOrderResult
+        ...AddItemToOrderResult
         }
     }
     ${ADD_ITEM_TO_ORDER_RESULT_FRAGMENT}

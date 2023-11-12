@@ -10,14 +10,15 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer } from './store/app.reducer';
 import { appEffects } from './store/app.effects';
+import { ResponseHeaderInterceptor } from './core/http/http-interceptor';
 
 const routerConfig: ExtraOptions = {
-    preloadingStrategy       : PreloadAllModules,
+    preloadingStrategy: PreloadAllModules,
     scrollPositionRestoration: 'enabled'
 };
 
@@ -25,7 +26,7 @@ const routerConfig: ExtraOptions = {
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
@@ -47,10 +48,16 @@ const routerConfig: ExtraOptions = {
         StoreModule.forRoot(appReducer),
         EffectsModule.forRoot(appEffects),
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ResponseHeaderInterceptor,
+            multi: true,
+        },
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

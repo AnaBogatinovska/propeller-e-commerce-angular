@@ -13,6 +13,9 @@ export const LOAD_PRODUCT_BY_ID_SUCCESS = '[Product] LOAD_PRODUCT_BY_ID_SUCCESS'
 export const ADD_ITEM_TO_ORDER = '[Product] ADD_ITEM_TO_ORDER';
 export const ADD_ITEM_TO_ORDER_SUCCESS = '[Product] ADD_ITEM_TO_ORDER_SUCCESS';
 
+export const GET_ACTIVE_ORDER = '[Product] GET_ACTIVE_ORDER';
+export const GET_ACTIVE_ORDER_SUCCESS = '[Product] GET_ACTIVE_ORDER_SUCCESS';
+
 export const REQUEST_FAILED = '[Product] REQUEST_FAILED' 
 
 
@@ -27,6 +30,9 @@ export const LoadProductByIdSuccess = createAction(LOAD_PRODUCT_BY_ID_SUCCESS, p
 export const AddItemToOrder = createAction(ADD_ITEM_TO_ORDER, props<{ payload: { productVariantId: string, quantity: number } }>());
 export const AddItemToOrderSuccess = createAction(ADD_ITEM_TO_ORDER_SUCCESS, props<{ payload: { order: Order } }>());
 
+export const GetActiveOrder = createAction(GET_ACTIVE_ORDER);
+export const GetActiveOrderSuccess = createAction(GET_ACTIVE_ORDER_SUCCESS, props<{ payload: { order: Order } }>());
+
 export const RequestFailed = createAction(REQUEST_FAILED, props<any>())
 
 const all = union({
@@ -36,6 +42,8 @@ const all = union({
     LoadProductByIdSuccess,
     AddItemToOrder,
     AddItemToOrderSuccess,
+    GetActiveOrder,
+    GetActiveOrderSuccess,
 });
 
 export type ProductsTypeActions = typeof all;

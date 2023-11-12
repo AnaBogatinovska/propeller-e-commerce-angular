@@ -1,1 +1,3 @@
-<p>Order Details</p>
+<div *ngIf="order$ | async as order">
+    {{ order | json }}
+</div>

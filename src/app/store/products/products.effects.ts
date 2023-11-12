@@ -57,6 +57,23 @@ export class ProductsEffects {
                 })
             );
         });
+
+        // Get active order List
+        public getActiveOrder = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.GET_ACTIVE_ORDER),
+                exhaustMap((action) => {
+                    
+                    return this.productsService?.getActiveOrder().pipe(
+                        map((data) => {
+                            console.log('effects', data)
+                            return productActions?.GetActiveOrderSuccess({ payload: { order: data?.activeOrder } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
     
         // error
         private handleError(error: {errors: any[]}): Observable<any> {

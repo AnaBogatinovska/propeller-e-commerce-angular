@@ -4,6 +4,7 @@ import * as productActions from './products.actions';
 
 const initialState: ProductsState = {
     products: null,
+    activeOrder: null,
     totalItems: 0
 };
 
@@ -16,5 +17,12 @@ export const productsReducer = createReducer(
             products: [...data.payload.products],
             totalItems: data.payload.totalItems
         }
-    })
+    }),
+    on(productActions.GetActiveOrderSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            activeOrder: {...data.payload.order}
+        }
+    }),
 );
