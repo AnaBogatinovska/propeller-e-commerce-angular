@@ -18,6 +18,7 @@ export const appRoutes: Route[] = [
         },
         children: [
             { path: '', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
+            { path: 'orders', loadChildren: () => import('app/modules/orders/orders.module').then(m => m.OrdersModule) },
             { path: 'product/:id', loadChildren: () => import('app/modules/product/product.module').then(m => m.ProductModule) },
         ]
     },
