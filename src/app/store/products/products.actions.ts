@@ -1,20 +1,32 @@
 import { createAction, props, union } from '@ngrx/store';
 import { ProductListOptions } from 'app/shared/interfaces/products/product-list-options.interface';
+import { Product } from 'app/shared/interfaces/products/product.interface';
+// <--- Types --->
 
-// Load Products
-export const LOAD_PRODUCTS = '[Product] Load Products';
-export const LOAD_PRODUCTS_SUCCESS = '[Product] Load Products Success';
+export const LOAD_PRODUCTS = '[Product] LOAD_PRODUCTS';
+export const LOAD_PRODUCTS_SUCCESS = '[Product] LOAD_PRODUCTS_SUCCESS';
+
+export const LOAD_PRODUCT_BY_ID = '[Product] LOAD_PRODUCT_BY_ID';
+export const LOAD_PRODUCT_BY_ID_SUCCESS = '[Product] LOAD_PRODUCT_BY_ID_SUCCESS';
 
 export const REQUEST_FAILED = '[Product] REQUEST_FAILED' 
 
+
+// <--- Actions--->
+
 export const LoadProducts = createAction(LOAD_PRODUCTS, props<{ payload: { opts?: ProductListOptions } }>());
-export const LoadProductsSuccess = createAction(LOAD_PRODUCTS_SUCCESS, props<{ payload: { products: any, totalItems: number } }>());
+export const LoadProductsSuccess = createAction(LOAD_PRODUCTS_SUCCESS, props<{ payload: { products: Product[], totalItems: number } }>());
+
+export const LoadProductById = createAction(LOAD_PRODUCT_BY_ID, props<{ payload: { id: number } }>());
+export const LoadProductByIdSuccess = createAction(LOAD_PRODUCT_BY_ID_SUCCESS, props<{ payload: { product: Product } }>());
 
 export const RequestFailed = createAction(REQUEST_FAILED, props<any>())
 
 const all = union({
     LoadProducts,
     LoadProductsSuccess,
+    LoadProductById,
+    LoadProductByIdSuccess,
 });
 
 export type ProductsTypeActions = typeof all;

@@ -22,5 +22,36 @@ fragment ProductListResult on ProductList {
     totalItems
 }
 `
+const PRODUCT_FRAGMENT = gql`
+fragment Product on Product {
+    id
+    name
+    description
+    variants {
+    id
+    name
+    }
+    featuredAsset {
+        name
+        width
+        height
+        source
+        preview
+        tags {
+            value
+        }
+    }
+    assets {
+        name
+        width
+        height
+        source
+        preview
+        tags {
+            value
+        }
+    }
+}
+`
 
-export { PRODUCT_LIST_RESULT_FRAGMENT };
+export { PRODUCT_LIST_RESULT_FRAGMENT, PRODUCT_FRAGMENT };

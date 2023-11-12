@@ -1,13 +1,15 @@
-import { createReducer, on} from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { ProductsState } from '../states/products-state.interface';
 import * as productActions from './products.actions';
 
 const initialState: ProductsState = {
     products: null,
+    product: null,
     totalItems: 0
 };
 
-export const productsReducer = createReducer(initialState, 
+export const productsReducer = createReducer(
+    initialState,
     on(productActions.LoadProductsSuccess, (state, data) => {
         console.log(data.payload)
         return {
@@ -15,5 +17,12 @@ export const productsReducer = createReducer(initialState,
             products: [...data.payload.products],
             totalItems: data.payload.totalItems
         }
-    })
-    );
+    }),
+    on(productActions.LoadProductByIdSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            product: {...data.payload.product},
+        }
+    }),
+);

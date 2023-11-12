@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
     this.store.dispatch(productsActions.LoadProducts({ payload: { opts: { take: 15 } } }))
   }
 
