@@ -48,7 +48,4 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.loading = false;
     })
   }
-
-
-
 }
