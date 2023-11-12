@@ -2,20 +2,59 @@
     <div class="w-full sm:max-w-fit flex-1 prose prose-sm">
         <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12">
             <div class="grid grid-cols-2 gap-8" *ngIf="product && !loading">
-                <div class="bg-white rounded shadow">
-                    <img [src]="product?.featuredAsset.source" alt="">
+                <div>
+                    <div class="bg-white rounded shadow">
+                        <img [src]="product?.featuredAsset.source" alt="" style="max-height: 400px;" class="m-0">
+                    </div>
                 </div>
                 <div class="bg-white rounded shadow p-4">
-                    <div class="text-lg font-bold">{{ product.name }}</div>
+                    <div class="text-xl font-bold">{{ product.name }}</div>
+                    <div class="flex gap-2 mt-4">
+                        <div>
+                            <div>Price:</div>
+                            <div>Tax: </div>
+                            <div style="color: #fe5000" class="font-bold text-lg">Total: </div>
+                        </div>
+                        <div>
+                            <div>{{ selectedVariant(product?.variants)?.price ?? 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
+                            <div>{{ selectedVariant(product?.variants) ? (selectedVariant(product?.variants)?.priceWithTax - selectedVariant(product?.variants)?.price) : 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
+                            <div style="color: #fe5000" class="font-bold text-lg">{{ selectedVariant(product?.variants)?.priceWithTax ?? 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
+                        </div>
+                    </div>
+
+                    <form class="mt-4" [formGroup]="formGroup">
+                        <div class="text-xs font-bold text-warn" *ngIf="!selectedVariant(product?.variants)">Please select an option</div>
+                        <mat-chip-listbox aria-label="Variant selection" ariaOrientation="horizontal" required formControlName="variantId">
+                            <mat-chip-option *ngFor="let variant of product?.variants; let idx = index" [value]="variant.id" color="accent" 
+                                class="text-xs">
+                                {{ variant?.name }}
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+                    
+                        <div class="flex gap-4 justify-between items-center my-4">
+                            <mat-form-field class="quantity m-0">
+                              <button mat-icon-button matPrefix [disabled]="formGroup.get('quantity').value == 1" (click)="updateQuantity($event, 'decrease')">
+                                <mat-icon>remove</mat-icon>
+                              </button>
+                              <input class="text-center w-32" type="number" min="1" max="99" matInput formControlName="quantity" >
+                              <button mat-icon-button matSuffix [disabled]="formGroup.get('quantity').value == 99" (click)="updateQuantity($event, 'increase')">
+                                <mat-icon>add</mat-icon>
+                              </button>
+                            </mat-form-field>
+                           <div class="flex-1 flex items-center">
+                                <button mat-flat-button type="button" class="flex-1" color="primary" (click)="addToOrder()" [disabled]="spinner || !formGroup.get('variantId').value">
+                                    <span *ngIf="!spinner">Add to Order</span>
+                                    <mat-progress-spinner
+                                        *ngIf="spinner"
+                                        [diameter]="24"
+                                        [mode]="'indeterminate'">
+                                    </mat-progress-spinner>
+                                </button>
+                           </div>
+                        </div>
+                    </form>
                     <div class="text-right my-2">
-                        <button mat-flat-button color="primary" (click)="addToOrder()" [disabled]="spinner">
-                            <span *ngIf="!spinner">Add to Order</span>
-                            <mat-progress-spinner
-                                *ngIf="spinner"
-                                [diameter]="24"
-                                [mode]="'indeterminate'">
-                            </mat-progress-spinner>
-                        </button>
+                      
                     </div>
                     <mat-accordion class="mt-6 damages-expansion-panel shadow-none">
                         <mat-expansion-panel expanded class="shadow-none rounded-md mb-3 m-0 px-3 py-1" >

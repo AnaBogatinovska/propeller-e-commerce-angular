@@ -29,11 +29,15 @@ fragment Product on Product {
     description
     slug
     variants {
-    id
-    name
-    assets{
-        source
-    }
+        id
+        name
+        sku
+        price
+        priceWithTax
+        currencyCode
+        assets {
+            source
+        }
     }
     featuredAsset {
         name

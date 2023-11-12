@@ -22,21 +22,10 @@ const GET_PRODUCT_BY_ID = gql`
 const GET_ACTIVE_ORDER = gql`
   query activeOrder {
     activeOrder{
-      id
-      active
-      type
-      total
-      currencyCode
-      totalQuantity
-      lines {
-        id
-        productVariant {
-          name
-        }
-      }
+      ...ActiveOrder
     }
   }
- 
+ ${ACTIVE_ORDER_FRAGMENT}
 `
 
 export { GET_PRODUCT_LIST, GET_PRODUCT_BY_ID, GET_ACTIVE_ORDER };

@@ -2,3 +2,34 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+
+
+// chip remove icon
+.mdc-evolution-chip__graphic.mat-mdc-chip-graphic {
+    opacity: 0;
+    width: 0 !important;
+}
+
+// remove arrows from mat-input type  number
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+// quantity input
+.quantity.mat-mdc-form-field.mat-form-field-appearance-fill
+ .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex 
+ .mat-mdc-form-field-infix {
+    width: 30px;
+}
+
+.quantity.mat-mdc-form-field.mat-form-field-appearance-fill .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}

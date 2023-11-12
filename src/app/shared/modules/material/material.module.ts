@@ -24,6 +24,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     MatStepperModule,
     MatSliderModule,
     MatTooltipModule,
-    ClipboardModule
+    ClipboardModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule {
