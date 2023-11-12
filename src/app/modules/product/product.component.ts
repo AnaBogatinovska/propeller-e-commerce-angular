@@ -15,8 +15,10 @@ import { Subscription } from 'rxjs';
 export class ProductComponent implements OnInit, OnDestroy {
   public product: Product;
   public loading: boolean = true;
+  public spinner: boolean = false;
 
   private subLoadProduct: Subscription;
+  private subAddItemToOrder: Subscription;
   private subLoadProductFailed: Subscription;
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) { }
@@ -28,6 +30,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     tryUnsubscribe(this.subLoadProduct);
+    tryUnsubscribe(this.subAddItemToOrder);
     tryUnsubscribe(this.subLoadProductFailed);
   }
 
@@ -42,10 +45,25 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.product = action.payload.product;
       this.loading = false;
     })
+    this.subAddItemToOrder = this.actions$.pipe(
+      ofType(productsActions.ADD_ITEM_TO_ORDER_SUCCESS)
+    ).subscribe(() => {
+      this.spinner = false;
+    })
     this.subLoadProductFailed = this.actions$.pipe(
       ofType(productsActions.REQUEST_FAILED)
     ).subscribe(() => {
       this.loading = false;
+      this.spinner = false;
     })
+  }
+
+  public addToOrder() {
+    this.spinner = true;
+    this.addItemToOrder();
+  }
+  
+  private addItemToOrder() {
+    this.store.dispatch(productsActions.AddItemToOrder({payload: { productVariantId: this.product.id, quantity: 2 }}))
   }
 }

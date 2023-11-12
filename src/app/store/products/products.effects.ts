@@ -42,6 +42,21 @@ export class ProductsEffects {
                 })
             );
         });
+
+        // Add item to order List
+        public addItemToOrder = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.ADD_ITEM_TO_ORDER),
+                exhaustMap((action) => {
+                    return this.productsService?.addItemToOrder({productVariantId: action?.payload?.productVariantId, quantity: action?.payload?.quantity}).pipe(
+                        map((data) => {
+                            return productActions?.AddItemToOrderSuccess({ payload: { order: data?.order } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
     
         // error
         private handleError(error: {errors: any[]}): Observable<any> {

@@ -1,4 +1,5 @@
 import { createAction, props, union } from '@ngrx/store';
+import { Order } from 'app/shared/interfaces/orders/order.interface';
 import { ProductListOptions } from 'app/shared/interfaces/products/product-list-options.interface';
 import { Product } from 'app/shared/interfaces/products/product.interface';
 // <--- Types --->
@@ -8,6 +9,9 @@ export const LOAD_PRODUCTS_SUCCESS = '[Product] LOAD_PRODUCTS_SUCCESS';
 
 export const LOAD_PRODUCT_BY_ID = '[Product] LOAD_PRODUCT_BY_ID';
 export const LOAD_PRODUCT_BY_ID_SUCCESS = '[Product] LOAD_PRODUCT_BY_ID_SUCCESS';
+
+export const ADD_ITEM_TO_ORDER = '[Product] ADD_ITEM_TO_ORDER';
+export const ADD_ITEM_TO_ORDER_SUCCESS = '[Product] ADD_ITEM_TO_ORDER_SUCCESS';
 
 export const REQUEST_FAILED = '[Product] REQUEST_FAILED' 
 
@@ -20,6 +24,9 @@ export const LoadProductsSuccess = createAction(LOAD_PRODUCTS_SUCCESS, props<{ p
 export const LoadProductById = createAction(LOAD_PRODUCT_BY_ID, props<{ payload: { id: number } }>());
 export const LoadProductByIdSuccess = createAction(LOAD_PRODUCT_BY_ID_SUCCESS, props<{ payload: { product: Product } }>());
 
+export const AddItemToOrder = createAction(ADD_ITEM_TO_ORDER, props<{ payload: { productVariantId: string, quantity: number } }>());
+export const AddItemToOrderSuccess = createAction(ADD_ITEM_TO_ORDER_SUCCESS, props<{ payload: { order: Order } }>());
+
 export const RequestFailed = createAction(REQUEST_FAILED, props<any>())
 
 const all = union({
@@ -27,6 +34,8 @@ const all = union({
     LoadProductsSuccess,
     LoadProductById,
     LoadProductByIdSuccess,
+    AddItemToOrder,
+    AddItemToOrderSuccess,
 });
 
 export type ProductsTypeActions = typeof all;

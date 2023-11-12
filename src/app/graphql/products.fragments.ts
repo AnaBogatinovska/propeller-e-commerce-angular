@@ -58,4 +58,32 @@ fragment Product on Product {
 }
 `
 
-export { PRODUCT_LIST_RESULT_FRAGMENT, PRODUCT_FRAGMENT };
+const ADD_ITEM_TO_ORDER_RESULT_FRAGMENT = gql`
+fragment addItemToOrderResult on UpdateOrderItemsResult {
+    ... on Order {
+      id
+      type
+      active
+      total
+    }
+    ... on OrderModificationError {
+      message
+      errorCode
+    }
+    ... on OrderLimitError {
+      message
+      errorCode
+    }
+    ... on NegativeQuantityError {
+      message
+      errorCode
+    }
+    ... on InsufficientStockError {
+      message
+      errorCode
+      quantityAvailable
+    }
+  }
+`
+
+export { PRODUCT_LIST_RESULT_FRAGMENT, PRODUCT_FRAGMENT, ADD_ITEM_TO_ORDER_RESULT_FRAGMENT };
