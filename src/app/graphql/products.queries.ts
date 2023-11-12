@@ -1,5 +1,5 @@
 import { gql } from "apollo-angular";
-import { ProductListResultFragment } from "./products.fragments";
+import { PRODUCT_LIST_RESULT_FRAGMENT } from "./products.fragments";
 
 const GET_PRODUCT_LIST = gql`
   query GetProductLists($opts: ProductListOptions) {
@@ -7,7 +7,7 @@ const GET_PRODUCT_LIST = gql`
       ...ProductListResult
     }
   }
-  ${ProductListResultFragment}
+  ${PRODUCT_LIST_RESULT_FRAGMENT}
 `
 
 export { GET_PRODUCT_LIST };

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
-import {ProductListOptions} from '../interfaces/products/product-list-options.interface';
-import { ApolloQueryResult, GraphQLRequest, Observable } from "@apollo/client";
+import { GraphQLRequest } from "@apollo/client";
 import { map } from "rxjs";
 
 @Injectable({ providedIn: 'root' })

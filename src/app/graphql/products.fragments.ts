@@ -1,6 +1,6 @@
 import { gql } from "apollo-angular";
 
-const ProductListResultFragment = gql`
+const PRODUCT_LIST_RESULT_FRAGMENT = gql`
 fragment ProductListResult on ProductList {
     items {
         name
@@ -22,4 +22,4 @@ fragment ProductListResult on ProductList {
 }
 `
 
-export { ProductListResultFragment };
+export { PRODUCT_LIST_RESULT_FRAGMENT };
