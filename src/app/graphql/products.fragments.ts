@@ -3,6 +3,7 @@ import { gql } from "apollo-angular";
 const PRODUCT_LIST_RESULT_FRAGMENT = gql`
 fragment ProductListResult on ProductList {
     items {
+        id
         name
        variants {
         name

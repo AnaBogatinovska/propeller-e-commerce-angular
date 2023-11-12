@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from '@apollo/client';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Apollo } from 'apollo-angular';
-import { GET_PRODUCT_LIST } from 'app/graphql/products.queries';
-import { ProductListOptions } from 'app/shared/interfaces/products/product-list-options.interface';
 import * as productsActions from 'app/store/products/products.actions';
 import { selectProducts } from 'app/store/products/products.selectors';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +10,15 @@ import { map } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products$ = this.store.select(selectProducts);
+  public products$ = this.store.select(selectProducts);
 
-  constructor(private store: Store, private apollo: Apollo) { }
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.store.dispatch(productsActions.LoadProducts({ payload: { opts: { take: 15 } } }))
   }
 
- 
-
+  public onProductClick(id: number): void {
+    this.router.navigate(['product', id], { relativeTo: this.route })
+  }
 }
