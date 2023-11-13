@@ -25,6 +25,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatSliderModule,
     MatTooltipModule,
     ClipboardModule,
+    MatButtonToggleModule
   ],
   exports: [
     MatTabsModule,
@@ -78,6 +80,7 @@ import {MatChipsModule} from '@angular/material/chips';
     MatTooltipModule,
     ClipboardModule,
     MatChipsModule,
+    MatButtonToggleModule
   ],
 })
 export class MaterialModule {

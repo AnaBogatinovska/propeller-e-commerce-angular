@@ -3,6 +3,7 @@ import { ProductsState } from '../states/products-state.interface';
 import * as productActions from './products.actions';
 
 const initialState: ProductsState = {
+    collections: null,
     products: null,
     activeOrder: null,
     totalItems: 0
@@ -10,12 +11,12 @@ const initialState: ProductsState = {
 
 export const productsReducer = createReducer(
     initialState,
-    on(productActions.LoadProductsSuccess, (state, data) => {
+  
+    on(productActions.GetActiveOrderSuccess, (state, data) => {
         console.log(data.payload)
         return {
             ...state,
-            products: [...data.payload.products],
-            totalItems: data.payload.totalItems
+            activeOrder: {...data.payload.order}
         }
     }),
     on(productActions.GetActiveOrderSuccess, (state, data) => {
@@ -23,6 +24,20 @@ export const productsReducer = createReducer(
         return {
             ...state,
             activeOrder: {...data.payload.order}
+        }
+    }),
+    on(productActions.GetCollectionsSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            collections: {...data.payload.collections}
+        }
+    }),
+    on(productActions.SearchSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            products: {...data.payload.searchResult}
         }
     }),
 );

@@ -7,6 +7,8 @@ fragment ProductListResult on ProductList {
         name
        variants {
         name
+        price
+        currencyCode
        }
         featuredAsset {
             name

@@ -1,16 +1,43 @@
 <div class="flex flex-col items-center justify-center w-full h-full">
     <div class="w-full sm:max-w-fit flex-1 prose prose-sm">
-        <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-8">
-                <fuse-card class="flex flex-col cursor-pointer" #fuseCard *ngFor="let item of products$ | async" (click)="onProductClick(item.id)">
-                    <div class="banner-height">
-                        <img class="m-0 object-cover h-full" [src]="item?.featuredAsset?.preview" [alt]="item?.featuredAsset?.name">
-                    </div>
-                    <div class="text-lg font-bold mt-2 line-clamp-2 px-4" [title]="item.name"> {{ item.name }}</div>
-                    <div class="mt-3 px-4">
-                      <!--Footer-->
-                    </div>
-                </fuse-card>
+        <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12 grid grid-cols-1 sm:grid-cols-5">
+            <div class="sm:col-span-1">
+                <div class="color-primary text-xl font-weigth-bold mb-4">Categories</div>
+                <div>
+                    <mat-button-toggle-group name="fontStyle" [vertical]="true" [value]="selectedCollectionId" (change)="onCollectionSelect($event)">
+                        <mat-button-toggle [value]="null" class="mb-2"> All products</mat-button-toggle>
+                        <mat-button-toggle class="mb-2" *ngFor="let item of (collections$ | async)?.items" [value]="item.id">{{ item?.name }}</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+            <div class="sm:col-span-4">
+                <div class="flex justify-end">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Sort By:</mat-label>
+                        <mat-select [(value)]="sortBy" (selectionChange)="sortBySelection($event)">
+                          <mat-option></mat-option>
+                          <mat-option value="ASC">Price: Low to High</mat-option>
+                          <mat-option value="DESC">Price: High to low</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div  *ngIf="!spinner && (products$ | async)?.items && (products$ | async)?.items.length" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-8">
+                    <fuse-card class="flex flex-col cursor-pointer" #fuseCard *ngFor="let item of (products$ | async)?.items" (click)="onProductClick(item.productId)">
+                        <div class="banner-height">
+                            <img class="m-0 object-cover h-full" [src]="item?.productAsset?.preview">
+                        </div>
+                        <div class="text-lg font-bold mt-2 line-clamp-2 px-4" [title]="item?.productName"> {{ item?.productName }}</div>
+                        <div class="mt-3 px-4">
+                          {{ item?.price?.value  }}
+                        </div>
+                    </fuse-card>
+                </div>
+                <div *ngIf="spinner" class="flex justify-center">
+                    <mat-progress-spinner
+                        [diameter]="24"
+                        [mode]="'indeterminate'">
+                    </mat-progress-spinner>
+                </div>
             </div>
         </div>
     </div>

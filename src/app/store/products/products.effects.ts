@@ -66,8 +66,39 @@ export class ProductsEffects {
                     
                     return this.productsService?.getActiveOrder().pipe(
                         map((data) => {
-                            console.log('effects', data)
                             return productActions?.GetActiveOrderSuccess({ payload: { order: data?.activeOrder } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
+
+        // Get collections
+        public getCollections = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.GET_COLLECTIONS),
+                exhaustMap((action) => {
+                    
+                    return this.productsService?.getCollections(action?.payload?.opts).pipe(
+                        map((data) => {
+                            return productActions?.GetCollectionsSuccess({ payload: { collections: data?.collections } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
+
+        // Search result
+        public search = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.SEARCH),
+                exhaustMap((action) => {
+                    
+                    return this.productsService?.search(action?.payload?.opts).pipe(
+                        map((data) => {
+                            return productActions?.SearchSuccess({ payload: { searchResult: data?.search } })
                         }),
                         catchError((error) => this.handleError(error))
                     );

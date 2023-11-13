@@ -7,7 +7,7 @@ import { LayoutComponent } from 'app/layout/layout.component';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    { path: '', pathMatch: 'full', redirectTo: '/' },
+    { path: '', pathMatch: 'full', redirectTo: 'home' },
 
     // Landing routes
     {
@@ -17,7 +17,7 @@ export const appRoutes: Route[] = [
             layout: 'modern'
         },
         children: [
-            { path: '', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
+            { path: 'home', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
             { path: 'orders', loadChildren: () => import('app/modules/orders/orders.module').then(m => m.OrdersModule) },
             { path: 'product/:id', loadChildren: () => import('app/modules/product/product.module').then(m => m.ProductModule) },
         ]
