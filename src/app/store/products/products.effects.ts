@@ -105,6 +105,38 @@ export class ProductsEffects {
                 })
             );
         });
+
+        // Adjust Order Line
+        public adjsutOrderLine = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.ADJUST_ORDER_LINE),
+                exhaustMap((action) => {
+                    
+                    return this.productsService?.adjustOrderLine({orderLineId: action?.payload?.orderLineId, quantity: action?.payload?.quantity}).pipe(
+                        map((data) => {
+                            return productActions?.AdjustOrderLineSuccess({ payload: { order: data?.adjustOrderLine } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
+
+        // Remove Order Line
+        public removeOrderLine = createEffect(() => {
+            return this.actions$.pipe(
+                ofType(productActions?.REMOVE_ORDER_LINE),
+                exhaustMap((action) => {
+                    
+                    return this.productsService?.removeOrderLine({orderLineId: action?.payload?.orderLineId}).pipe(
+                        map((data) => {
+                            return productActions?.RemoveOrderLineSuccess({ payload: { order: data?.removeOrderLine } })
+                        }),
+                        catchError((error) => this.handleError(error))
+                    );
+                })
+            );
+        });
     
         // error
         private handleError(error: {errors: any[]}): Observable<any> {

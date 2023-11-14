@@ -40,4 +40,18 @@ export const productsReducer = createReducer(
             products: {...data.payload.searchResult}
         }
     }),
+    on(productActions.AdjustOrderLineSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            activeOrder: {...data.payload.order}
+        }
+    }),
+    on(productActions.RemoveOrderLineSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            activeOrder: {...data.payload.order}
+        }
+    }),
 );

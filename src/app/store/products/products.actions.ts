@@ -26,6 +26,12 @@ export const GET_COLLECTIONS_SUCCESS = '[Product] GET_COLLECTIONS_SUCCESS';
 export const SEARCH = '[Product] SEARCH';
 export const SEARCH_SUCCESS = '[Product] SEARCH_SUCCESS';
 
+export const ADJUST_ORDER_LINE = '[Product] ADJUST_ORDER_LINE';
+export const ADJUST_ORDER_LINE_SUCCESS = '[Product] ADJUST_ORDER_LINE_SUCCESS';
+
+export const REMOVE_ORDER_LINE = '[Product] REMOVE_ORDER_LINE';
+export const REMOVE_ORDER_LINE_SUCCESS = '[Product] REMOVE_ORDER_LINE_SUCCESS';
+
 export const REQUEST_FAILED = '[Product] REQUEST_FAILED' 
 
 
@@ -49,6 +55,12 @@ export const GetCollectionsSuccess = createAction(GET_COLLECTIONS_SUCCESS, props
 export const Search = createAction(SEARCH, props<{ payload?: { opts?: SearchInput } }>());
 export const SearchSuccess = createAction(SEARCH_SUCCESS, props<{ payload: { searchResult: SearchResponse } }>());
 
+export const AdjustOrderLine = createAction(ADJUST_ORDER_LINE, props<{ payload?: { orderLineId: string, quantity: number } }>());
+export const AdjustOrderLineSuccess = createAction(ADJUST_ORDER_LINE_SUCCESS, props<{ payload: { order: Order } }>());
+
+export const RemoveOrderLine = createAction(REMOVE_ORDER_LINE, props<{ payload?: { orderLineId: string } }>());
+export const RemoveOrderLineSuccess = createAction(REMOVE_ORDER_LINE_SUCCESS, props<{ payload: { order: Order } }>());
+
 export const RequestFailed = createAction(REQUEST_FAILED, props<any>())
 
 const all = union({
@@ -63,7 +75,11 @@ const all = union({
     GetCollections,
     GetCollectionsSuccess,
     Search, 
-    SearchSuccess
+    SearchSuccess,
+    AdjustOrderLine,
+    AdjustOrderLineSuccess,
+    RemoveOrderLine,
+    RemoveOrderLineSuccess,
 });
 
 export type ProductsTypeActions = typeof all;

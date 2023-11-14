@@ -25,7 +25,10 @@ export class OrdersComponent implements OnInit {
 
   public updateQuantity(event,line, orderLineId: string, quantity: number) {
     event.stopPropagation()
+    this.store.dispatch(productsActions.AdjustOrderLine({ payload: { orderLineId, quantity }}))
   }
 
-
+  public deleteOderLine(orderLineId: string) {
+    this.store.dispatch(productsActions.RemoveOrderLine({ payload: { orderLineId }}))
+  }
 }

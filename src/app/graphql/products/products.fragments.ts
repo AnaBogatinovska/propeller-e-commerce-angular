@@ -64,51 +64,7 @@ fragment Product on Product {
 }
 `
 
-const ADD_ITEM_TO_ORDER_RESULT_FRAGMENT = gql`
-fragment AddItemToOrderResult on UpdateOrderItemsResult {
-    ... on Order {
-        id
-        type
-        active
-        total
-        totalWithTax
-        totalQuantity
-        subTotal
-        subTotalWithTax
-        shipping
-        shippingWithTax
-    
-        billingAddress {
-            fullName
-            country
-            phoneNumber
-        }
-        taxSummary {
-            description
-            taxRate
-            taxBase
-            taxTotal
-        }
-    }
-    ... on OrderModificationError {
-      message
-      errorCode
-    }
-    ... on OrderLimitError {
-      message
-      errorCode
-    }
-    ... on NegativeQuantityError {
-      message
-      errorCode
-    }
-    ... on InsufficientStockError {
-      message
-      errorCode
-      quantityAvailable
-    }
-  }
-`
+
 
 const ACTIVE_ORDER_FRAGMENT = gql`
 fragment ActiveOrder on Order {
@@ -131,10 +87,13 @@ fragment ActiveOrder on Order {
         linePriceWithTax
         discountedLinePrice
         discountedLinePriceWithTax
+      
         productVariant {
             name
-            featuredAsset {
-                preview
+            product {
+                featuredAsset {
+                    preview
+                }
             }
         }
     }
@@ -144,6 +103,29 @@ fragment ActiveOrder on Order {
         phoneNumber
     }
 }
+`
+const ADD_ITEM_TO_ORDER_RESULT_FRAGMENT = gql`
+fragment AddItemToOrderResult on UpdateOrderItemsResult {
+    ...ActiveOrder
+    ... on OrderModificationError {
+      message
+      errorCode
+    }
+    ... on OrderLimitError {
+      message
+      errorCode
+    }
+    ... on NegativeQuantityError {
+      message
+      errorCode
+    }
+    ... on InsufficientStockError {
+      message
+      errorCode
+      quantityAvailable
+    }
+  }
+  ${ACTIVE_ORDER_FRAGMENT}
 `
 
 export { 
