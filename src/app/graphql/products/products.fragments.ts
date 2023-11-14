@@ -124,6 +124,19 @@ fragment ActiveOrder on Order {
     shippingWithTax
     lines {
         id
+        quantity
+        orderPlacedQuantity
+        linePrice
+        unitPrice
+        linePriceWithTax
+        discountedLinePrice
+        discountedLinePriceWithTax
+        productVariant {
+            name
+            featuredAsset {
+                preview
+            }
+        }
     }
     shippingAddress {
         fullName

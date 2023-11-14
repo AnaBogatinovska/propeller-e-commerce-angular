@@ -1,3 +1,56 @@
-<div *ngIf="order$ | async as order">
-    {{ order | json }}
+
+<div class="flex flex-col items-center justify-center w-full h-full">
+    <div class="w-full flex-1">
+        <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12">
+            <div class="sm:grid sm:grid-cols-6 gap-4" *ngIf="order$ | async as order">
+                <div class="sm:col-span-4 bg-white shadow rounded-lg p-4">
+                    <div class="line flex justify-between gap-8 py-4 px-2 border-t" *ngFor="let line of order?.lines">
+                       <div class="flex gap-2">
+                            <div>
+                                <img [src]="line.productVariant?.featuredAsset?.preview" alt="line">
+                            </div>
+                            <div class="text-lg font-semibold">{{ line.productVariant.name }}</div>
+                       </div>
+                       <div class="flex items-center gap-4">
+                            <div>
+                                <mat-form-field class="quantity m-0">
+                                    <button mat-icon-button matPrefix (click)="updateQuantity($event, line, line.id, line.quantity - 1, remove)">
+                                      <mat-icon>remove</mat-icon>
+                                    </button>
+                                    <input class="text-center w-32" type="number" min="1" max="99" matInput [value]="line.quantity">
+                                    <button mat-icon-button matSuffix (click)="updateQuantity(line, line.id, line.quantity + 1, add)">
+                                      <mat-icon>add</mat-icon>
+                                    </button>
+                                  </mat-form-field>
+                            </div>
+                            <div class="text-lg font-semibold">{{ line.unitPrice}}</div>
+                       </div>
+                    </div>
+                </div>
+                <div class="sm:col-span-2 bg-white shadow rounded-lg p-4">
+                    <div>Order Summary</div>
+                    <div class="flex iteme-center justify-between gap-2">
+                        <div>
+                            <div>Price:</div>
+                            <div>Tax:</div>
+                        </div>
+                        <div>
+                            <div>{{ order?.total }}</div>
+                            <div>{{ order?.totalWithTax - order?.total }}</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center gap-2">
+                        <div>Total:</div>
+                        <div>{{ order?.totalWithTax }}</div>
+                    </div>
+
+                    <div>
+                        <button mat-flat-button color="primary">Payment</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>

@@ -22,4 +22,10 @@ export class OrdersComponent implements OnInit {
   private loadActiveOrder() {
     this.store.dispatch(productsActions.GetActiveOrder());
   }
+
+  public updateQuantity(event,line, orderLineId: string, quantity: number) {
+    event.stopPropagation()
+  }
+
+
 }
