@@ -5,14 +5,14 @@
             <div class="sm:grid sm:grid-cols-6 items-start gap-4" *ngIf="order$ | async as order">
                 <div class="sm:col-span-4 bg-white shadow rounded-lg p-8 border-b">
                     <div class="mb-8 text-xl font-bold">Your Cart({{ order?.lines?.length }}): </div>
-                    <div class="line flex justify-between gap-8 p-6 border-t" [class.border-b]="idx == order?.lines?.length - 1" *ngFor="let line of order?.lines; let idx = index">
+                    <div class="line flex justify-between gap-8 p-6 border-t flex-wrap" [class.border-b]="idx == order?.lines?.length - 1" *ngFor="let line of order?.lines; let idx = index">
                        <div class="flex-1 flex gap-3 ">
                             <div>
                                 <img class="product-img rounded-lg" [src]="line.productVariant?.product?.featuredAsset?.preview" alt="line">
                             </div>
                             <div class="text-lg font-semibold">{{ line.productVariant.name }}</div>
                        </div>
-                       <div class="grid grid-cols-3 items-center justify-end text-center gap-4">
+                       <div class="flex flex-wrap items-center justify-end text-center gap-4">
                             <div>
                                 <mat-form-field class="quantity m-0">
                                     <button mat-icon-button matPrefix  [disabled]="line.quantity <= 1" (click)="updateQuantity($event, line, line.id, line.quantity - 1, remove)">
@@ -33,7 +33,7 @@
                        </div>
                     </div>
                 </div>
-                <div class="sm:col-span-2 bg-white shadow rounded-lg p-4">
+                <div class="sm:col-span-2 bg-white shadow rounded-lg p-4 mt-4 sm:mt-0">
                     <div class="text-lg font-semibold mb-4">Order Summary:</div>
                     <div class="flex iteme-center justify-between gap-2">
                         <div>

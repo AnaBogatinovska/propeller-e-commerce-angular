@@ -65,7 +65,6 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.subAddItemToOrder = this.actions$.pipe(
       ofType(productsActions.ADD_ITEM_TO_ORDER_SUCCESS)
     ).subscribe(() => {
-      this.store.dispatch(productsActions.GetActiveOrder());
       this.spinner = false;
     })
     this.subLoadProductFailed = this.actions$.pipe(

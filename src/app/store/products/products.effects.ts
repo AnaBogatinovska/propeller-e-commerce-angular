@@ -50,7 +50,8 @@ export class ProductsEffects {
                 exhaustMap((action) => {
                     return this.productsService?.addItemToOrder({productVariantId: action?.payload?.productVariantId, quantity: action?.payload?.quantity}).pipe(
                         map((data) => {
-                            return productActions?.AddItemToOrderSuccess({ payload: { order: data?.order } })
+                            debugger
+                            return productActions?.AddItemToOrderSuccess({ payload: { order: data?.addItemToOrder } })
                         }),
                         catchError((error) => this.handleError(error))
                     );

@@ -26,6 +26,13 @@ export const productsReducer = createReducer(
             activeOrder: {...data.payload.order}
         }
     }),
+    on(productActions.AddItemToOrderSuccess, (state, data) => {
+        console.log(data.payload)
+        return {
+            ...state,
+            activeOrder: {...data.payload.order}
+        }
+    }),
     on(productActions.GetCollectionsSuccess, (state, data) => {
         console.log(data.payload)
         return {
