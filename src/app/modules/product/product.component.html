@@ -43,7 +43,7 @@
                             </mat-form-field>
                            <div class="flex-1 flex items-center">
                                 <button mat-flat-button type="button" class="flex-1" color="primary" (click)="addToOrder()" [disabled]="spinner || !formGroup.get('variantId').value">
-                                    <span *ngIf="!spinner">Add to Order</span>
+                                    <span *ngIf="!spinner">Add to Cart</span>
                                     <mat-progress-spinner
                                         *ngIf="spinner"
                                         [diameter]="24"
