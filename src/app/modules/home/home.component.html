@@ -1,16 +1,21 @@
 <div class="flex flex-col items-center justify-center w-full h-full">
     <div class="w-full flex-1">
         <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12 grid grid-cols-1 sm:grid-cols-5">
-            <div class="sm:col-span-1">
+            <div class="sm:col-span-2 md:col-span-1">
                 <div class="color-primary text-xl font-weigth-bold mb-4">Categories</div>
-                <div>
-                    <mat-button-toggle-group name="fontStyle" [vertical]="true" [value]="selectedCollectionId" (change)="onCollectionSelect($event)">
+                <div class="flex pr-4">
+                    <mat-button-toggle-group name="fontStyle" class="flex-1 flex flex-row flex-wrap gap-2 sm:flex-col sm:no-wrap" [vertical]="true" [value]="selectedCollectionId" (change)="onCollectionSelect($event)">
                         <mat-button-toggle [value]="null" class="mb-2"> All products</mat-button-toggle>
-                        <mat-button-toggle class="mb-2" *ngFor="let item of (collections$ | async)?.items" [value]="item.id">{{ item?.name }}</mat-button-toggle>
+                        <mat-button-toggle class="mb-2 truncate" *ngFor="let item of (collections$ | async)?.items" [value]="item.id">
+                           <span class="truncate">
+                               {{ item?.name }}
+
+                           </span>
+                        </mat-button-toggle>
                     </mat-button-toggle-group>
                 </div>
             </div>
-            <div class="sm:col-span-4">
+            <div class="sm:col-span-3 md:col-span-4">
                 <div class="flex justify-end">
                     <mat-form-field appearance="fill" class="w-52">
                         <mat-label>Sort By:</mat-label>
@@ -27,8 +32,8 @@
                             <img class="m-0 object-cover h-full" [src]="item?.productAsset?.preview">
                         </div>
                         <div class="text-lg font-bold mt-2 line-clamp-2 px-4" [title]="item?.productName"> {{ item?.productName }}</div>
-                        <div class="mt-3 px-4">
-                          {{ item?.price?.value  }}
+                        <div class="mt-3 px-4 font-bold text-md text-secondary">
+                          {{ item?.price?.value | currency: item?.currencyCode:'symbol-narrow' }}
                         </div>
                     </fuse-card>
                 </div>

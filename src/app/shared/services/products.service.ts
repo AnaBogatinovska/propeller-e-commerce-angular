@@ -40,7 +40,7 @@ export class ProductsService {
       const data = {
         query: GET_ACTIVE_ORDER
       };
-      return this.apolloService.query(data);
+      return this.apolloService.watchQuery(data);
     }
 
     // Collections

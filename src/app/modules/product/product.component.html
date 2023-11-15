@@ -14,9 +14,9 @@
                             <div style="color: #fe5000" class="font-bold text-lg">Total: </div>
                         </div>
                         <div>
-                            <div>{{ selectedVariant(product?.variants)?.price ?? 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
-                            <div>{{ selectedVariant(product?.variants) ? (selectedVariant(product?.variants)?.priceWithTax - selectedVariant(product?.variants)?.price) : 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
-                            <div style="color: #fe5000" class="font-bold text-lg">{{ selectedVariant(product?.variants)?.priceWithTax ?? 0 }} {{ selectedVariant(product?.variants) ? selectedVariant(product?.variants)?.currencyCode : '' }}</div>
+                            <div>{{ selectedVariant(product?.variants)?.price ?? 0 | currency: selectedVariant(product?.variants)?.currencyCode:'symbol-narrow' }}</div>
+                            <div>{{ (selectedVariant(product?.variants) ? (selectedVariant(product?.variants)?.priceWithTax - selectedVariant(product?.variants)?.price) : 0) | currency: selectedVariant(product?.variants)?.currencyCode:'symbol-narrow' }}</div>
+                            <div style="color: #fe5000" class="font-bold text-lg">{{ selectedVariant(product?.variants)?.priceWithTax ?? 0 | currency: selectedVariant(product?.variants)?.currencyCode:'symbol-narrow' }}</div>
                         </div>
                     </div>
 

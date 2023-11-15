@@ -24,7 +24,7 @@
                                     </button>
                                   </mat-form-field>
                             </div>
-                            <div class="text-lg font-semibold text-right">{{ line.unitPrice}}</div>
+                            <div class="text-lg font-semibold text-right">{{ line.unitPrice | currency: line?.currencyCode:'symbol-narrow' }}</div>
                             <div>
                                 <button mat-icon-button matSuffix (click)="deleteOderLine(line.id)">
                                     <mat-icon class="text-warn material-symbols-outlined">delete</mat-icon>
@@ -41,14 +41,14 @@
                             <div class="text-md text-warn my-2">Tax:</div>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-right">{{ order?.total || 0 }}</div>
-                            <div class="text-md text-warn text-right text-semibold my-2">{{ order?.totalWithTax || 0 - order?.total || 0 }}</div>
+                            <div class="text-lg font-bold text-right">{{ order?.total || 0 | currency: order?.currencyCode:'symbol-narrow'  }}</div>
+                            <div class="text-md text-warn text-right text-semibold my-2">{{ (order?.totalWithTax || 0 - order?.total || 0) | currency: order?.currencyCode:'symbol-narrow'  }}</div>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center gap-2 py-4 mt-2 mb-8 border-t">
                         <div class="text-xl font-bold">Total:</div>
-                        <div class="text-xl font-bold">{{ order?.totalWithTax }}</div>
+                        <div class="text-xl font-bold">{{ order?.totalWithTax | currency: order?.currencyCode:'symbol-narrow' }}</div>
                     </div>
 
                     <div class="flex">

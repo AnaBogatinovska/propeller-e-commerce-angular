@@ -81,7 +81,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   
   private addItemToOrder() {
-    this.store.dispatch(productsActions.AddItemToOrder({payload: { productVariantId: this.formGroup.get('variantId').value, quantity: 2 }}))
+    this.store.dispatch(productsActions.AddItemToOrder({payload: { productVariantId: this.formGroup.get('variantId').value, quantity: this.formGroup.get('quantity').value }}))
   }
 
   public updateQuantity(event, type: 'decrease' | 'increase') {
