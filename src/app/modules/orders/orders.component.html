@@ -5,6 +5,9 @@
             <div class="sm:grid sm:grid-cols-6 items-start gap-4" *ngIf="order$ | async as order">
                 <div class="sm:col-span-4 bg-white shadow rounded-lg p-8 border-b">
                     <div class="mb-8 text-xl font-bold">Your Cart({{ order?.lines?.length }}): </div>
+                    <div class="text-center" *ngIf="!order?.lines?.length">
+                        <button mat-flat-button color="primary" routerLink="../">Go shop!</button>
+                    </div>
                     <div class="line flex justify-between gap-8 p-6 border-t flex-wrap" [class.border-b]="idx == order?.lines?.length - 1" *ngFor="let line of order?.lines; let idx = index">
                        <div class="flex-1 flex gap-3 ">
                             <div>
@@ -34,8 +37,8 @@
                     </div>
                 </div>
                 <div class="sm:col-span-2 bg-white shadow rounded-lg p-4 mt-4 sm:mt-0">
-                    <div class="text-lg font-semibold mb-4">Order Summary:</div>
-                    <div class="flex iteme-center justify-between gap-2">
+                    <div class="text-xl font-semibold mb-4">Order Summary:</div>
+                    <div class="flex items-center justify-between gap-2">
                         <div>
                             <div class="text-accent text-lg font-semibold">Price:</div>
                             <div class="text-md text-warn my-2">Tax:</div>
