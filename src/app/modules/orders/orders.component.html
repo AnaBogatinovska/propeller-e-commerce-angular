@@ -41,8 +41,8 @@
                             <div class="text-md text-warn my-2">Tax:</div>
                         </div>
                         <div>
-                            <div class="text-lg font-bold text-right">{{ order?.total }}</div>
-                            <div class="text-md text-warn text-right text-semibold my-2">{{ order?.totalWithTax - order?.total }}</div>
+                            <div class="text-lg font-bold text-right">{{ order?.total || 0 }}</div>
+                            <div class="text-md text-warn text-right text-semibold my-2">{{ order?.totalWithTax || 0 - order?.total || 0 }}</div>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="flex">
-                        <button mat-flat-button color="primary" class="flex-1">Proceed to checkout</button>
+                        <button mat-flat-button color="primary" class="flex-1" [disabled]="!order?.lines.length">Proceed to checkout</button>
                     </div>
                 </div>
                 

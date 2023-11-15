@@ -35,8 +35,9 @@
                             "quill"
                         ],
                         "assets": [
-                            "src/favicon-16x16.png",
-                            "src/favicon-32x32.png",
+                            "src/assets/images/test1.png",
+                            "src/assets/images/test2.png",
+                            "src/assets/images/small-logo.jpg",
                             "src/assets",
                             {
                                 "glob": "_redirects",

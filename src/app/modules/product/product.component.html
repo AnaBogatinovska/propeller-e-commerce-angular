@@ -1,13 +1,11 @@
 <div class="flex flex-col items-center justify-center w-full h-full">
     <div class="w-full sm:max-w-fit flex-1 prose prose-sm">
         <div class="max-w-none sm:mx-auto py-8 px-4 sm:px-12">
-            <div class="grid grid-cols-2 gap-8" *ngIf="product && !loading">
-                <div>
-                    <div class="bg-white rounded shadow">
-                        <img [src]="product?.featuredAsset.source" alt="" style="max-height: 400px;" class="m-0">
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-6 gap-8" *ngIf="product && !loading">
+                <div class="bg-white rounded shadow sm:col-span-3 md:col-span-2">
+                    <app-gallery [images]="product?.assets"></app-gallery>
                 </div>
-                <div class="bg-white rounded shadow p-4">
+                <div class="bg-white rounded shadow p-4 sm:col-span-3 md:col-span-4">
                     <div class="text-xl font-bold">{{ product.name }}</div>
                     <div class="flex gap-2 mt-4">
                         <div>
@@ -31,7 +29,7 @@
                             </mat-chip-option>
                         </mat-chip-listbox>
                     
-                        <div class="flex gap-4 justify-between items-center my-4">
+                        <div class="flex flex-wrap gap-4 justify-between items-center my-4">
                             <mat-form-field class="quantity m-0">
                               <button mat-icon-button matPrefix [disabled]="formGroup.get('quantity').value == 1" (click)="updateQuantity($event, 'decrease')">
                                 <mat-icon>remove</mat-icon>

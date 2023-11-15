@@ -18,7 +18,6 @@ export class ProductsEffects {
                 exhaustMap((action) => {
                     return this.productsService?.getProducts(action?.payload?.opts).pipe(
                         map((data) => {
-                            console.log('Response', data)
                             return productActions?.LoadProductsSuccess({ payload: { products: data?.products?.items, totalItems: data?.products?.totalItems } })
                         }),
                         catchError((error) => this.handleError(error))
@@ -34,7 +33,6 @@ export class ProductsEffects {
                 exhaustMap((action) => {
                     return this.productsService?.getProductById(action?.payload?.id).pipe(
                         map((data) => {
-                            console.log('Response', data)
                             return productActions?.LoadProductByIdSuccess({ payload: { product: data.product } })
                         }),
                         catchError((error) => this.handleError(error))
@@ -50,7 +48,6 @@ export class ProductsEffects {
                 exhaustMap((action) => {
                     return this.productsService?.addItemToOrder({productVariantId: action?.payload?.productVariantId, quantity: action?.payload?.quantity}).pipe(
                         map((data) => {
-                            debugger
                             return productActions?.AddItemToOrderSuccess({ payload: { order: data?.addItemToOrder } })
                         }),
                         catchError((error) => this.handleError(error))
@@ -64,7 +61,6 @@ export class ProductsEffects {
             return this.actions$.pipe(
                 ofType(productActions?.GET_ACTIVE_ORDER),
                 exhaustMap((action) => {
-                    
                     return this.productsService?.getActiveOrder().pipe(
                         map((data) => {
                             return productActions?.GetActiveOrderSuccess({ payload: { order: data?.activeOrder } })
@@ -80,7 +76,6 @@ export class ProductsEffects {
             return this.actions$.pipe(
                 ofType(productActions?.GET_COLLECTIONS),
                 exhaustMap((action) => {
-                    
                     return this.productsService?.getCollections(action?.payload?.opts).pipe(
                         map((data) => {
                             return productActions?.GetCollectionsSuccess({ payload: { collections: data?.collections } })
@@ -96,7 +91,6 @@ export class ProductsEffects {
             return this.actions$.pipe(
                 ofType(productActions?.SEARCH),
                 exhaustMap((action) => {
-                    
                     return this.productsService?.search(action?.payload?.opts).pipe(
                         map((data) => {
                             return productActions?.SearchSuccess({ payload: { searchResult: data?.search } })
@@ -112,7 +106,6 @@ export class ProductsEffects {
             return this.actions$.pipe(
                 ofType(productActions?.ADJUST_ORDER_LINE),
                 exhaustMap((action) => {
-                    
                     return this.productsService?.adjustOrderLine({orderLineId: action?.payload?.orderLineId, quantity: action?.payload?.quantity}).pipe(
                         map((data) => {
                             return productActions?.AdjustOrderLineSuccess({ payload: { order: data?.adjustOrderLine } })
@@ -128,7 +121,6 @@ export class ProductsEffects {
             return this.actions$.pipe(
                 ofType(productActions?.REMOVE_ORDER_LINE),
                 exhaustMap((action) => {
-                    
                     return this.productsService?.removeOrderLine({orderLineId: action?.payload?.orderLineId}).pipe(
                         map((data) => {
                             return productActions?.RemoveOrderLineSuccess({ payload: { order: data?.removeOrderLine } })
