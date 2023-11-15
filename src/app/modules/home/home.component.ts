@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private searchProductsByCollection() {
     this.router.navigate([], { queryParams: { collectionId: this.selectedCollectionId  == 0 ? null: this.selectedCollectionId, sortBy: this.sortBy, skip: +this.skip == 0 ? null: +this.skip , take: +this.take ?? null } })
     const filters = { collectionId: this.selectedCollectionId || null, sort: { price: this.sortBy }, skip: +this.skip ?? null, take: +this.take ?? null }
-    const storageFilters = { pageIndex: this.pageIndex, collectionId: this.selectedCollectionId, sort: { price: this.sortBy }, skip: +this.skip ?? null, take: +this.take ?? null }
+    const storageFilters = { pageIndex: this.pageIndex, collectionId: this.selectedCollectionId, sortBy: this.sortBy, skip: +this.skip ?? null, take: +this.take ?? null }
     this.saveFilters(storageFilters)
     this.spinner = true;
     this.store.dispatch(productsActions.Search({ payload: { opts: filters } }))
