@@ -1,27 +1,25 @@
-# Fuse - Admin template and Starter project for Angular
+# E-Commerce Angular Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
+ Angular application built using the Fuse Angular template, Angular Material, and Tailwind CSS.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+Before you begin, ensure you have the following prerequisites installed:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Node.js](https://nodejs.org/) (>=14.x)
+- [Angular CLI](https://angular.io/cli) (>=12.x)
 
-## Build
+Getting Started
+Follow these steps to get started with the application:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone this repository:
+   - git clone https://github.com/yourusername/your-angular-app.git
 
-## Running unit tests
+2. Install the required dependencies (if you haven't already):
+   - npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Start the development server:
+   - ng serve
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.  To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Open your browser and navigate to http://localhost:4200/ to view the application.
